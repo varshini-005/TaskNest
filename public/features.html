@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - TaskNest</title>
+    <link rel="stylesheet" href="features.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">TaskNest</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2>Explore Our Features</h2>
+        <div class="feature-cards">
+            <div class="feature-card" style="background-image: url('path/to/task-management-image.jpg');" id="themes">
+                <h3>Theme Collection</h3>
+                <p>A diverse collection of beautifully crafted themes designed to suit every mood and need.</p>
+            </div>
+            <div class="feature-card" style="background-image: url('path/to/reminders-image.jpg');" id="timers">
+                <h3>Timely Reminders</h3>
+                <p>Set reminders for your tasks and never miss a deadline.</p>
+            </div>
+            <div class="feature-card" style="background-image: url('path/to/task-management-image.jpg');" id="tasks">
+                <h3>Task Management</h3>
+                <p>Stay organized by managing all your tasks in one place.</p>
+            </div>
+            <!-- <div class="feature-card" style="background-image: url('path/to/statistics-image.jpg'); color: lightgray; cursor: not-allowed;">
+                <h3>Statistics</h3>
+                <p>Track your productivity with detailed stats and progress reports.</p>
+                <h2 style="color: lightslategray;">Coming Soon...</h2>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 TaskNest. All Rights Reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('themes').onclick = function(){
+            window.location.href = 'themes.html'
+        }
+        document.getElementById('timers').onclick = function(){
+            window.location.href = 'timer.html'
+        }
+        document.getElementById('tasks').onclick = function(){
+            window.location.href = 'todo.html'
+        }
+    </script>
+</body>
+</html>

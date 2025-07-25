@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer with Breaks</title>
+    <style>
+         /* General Reset */
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #f5f5f5, #d8e3e7);
+            color: white;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #474787, #2c2c54);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f5b041;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .navbar-buttons .btn {
+            text-decoration: none;
+            background-color: #f5b041;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .navbar-buttons .btn:hover {
+            transform: scale(1.1);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #f5f5f5, #d8e3e7);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            flex-direction: column;
+            margin: 0;
+        }
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: black;
+        }
+        .timer-container {
+            text-align: center;
+            background: linear-gradient(90deg, #474787, #2c2c54);
+            border-radius: 15px;
+            padding: 40px;
+            width: 350px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .timer {
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .button {
+            padding: 12px 30px;
+            margin: 10px;
+            background-color: #f5b041;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .button:disabled {
+            background-color: #b0b0b0;
+            cursor: not-allowed;
+        }
+        .button:hover:enabled {
+            background-color: #e67e22;
+            transform: scale(1.05);
+        }
+        .button:active {
+            transform: scale(0.98);
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        .break-time {
+            font-size: 22px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">TaskNest</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h2>Pomodoro Timer</h2>
+    <div class="timer-container">
+        <div id="timer" class="timer">25:00</div>
+        <button id="startButton" class="button">Start Timer</button>
+        <button id="breakButton" class="button" disabled>Take a Break</button>
+        <div class="status" id="status"></div>
+        <div class="break-time" id="breakTime"></div>
+    </div>
+
+    <audio id="alarmSound" src="sound1.mp3" preload="auto"></audio> <!-- Ensure the audio path is correct -->
+
+    <script>
+        let timer;
+        let isTimerRunning = false;
+        let breakCounter = 0;
+        const breakLimit = 3;
+        let timeLeft = 25 * 60; // 25 minutes work time
+        let breakTimeLeft = 5 * 60; // 5 minutes break time
+        const alarmSound = document.getElementById("alarmSound");
+
+        const timerDisplay = document.getElementById("timer");
+        const startButton = document.getElementById("startButton");
+        const breakButton = document.getElementById("breakButton");
+        const statusDisplay = document.getElementById("status");
+        const breakTimeDisplay = document.getElementById("breakTime");
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        }
+
+        function startTimer() {
+            if (isTimerRunning) return;
+
+            isTimerRunning = true;
+            startButton.disabled = true;
+            breakButton.disabled = false;
+            statusDisplay.textContent = "Timer is running...";
+            breakTimeDisplay.textContent = ''; // Clear break time display
+
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    isTimerRunning = false;
+                    startButton.disabled = false;
+                    statusDisplay.textContent = "Time's up! Take a break!";
+                    alarmSound.play(); // This will only play after the timer reaches zero
+                    breakButton.disabled = false; // Enable break button when timer ends
+                }
+            }, 1000);
+        }
+
+        function takeBreak() {
+            if (breakCounter < breakLimit) {
+                breakCounter++;
+                statusDisplay.textContent = `Break ${breakCounter} started!`;
+                breakButton.disabled = true;
+
+                // Pause the main timer
+                clearInterval(timer);
+
+                breakTimeDisplay.textContent = `Break Time: ${Math.floor(breakTimeLeft / 60)}:${breakTimeLeft % 60 < 10 ? "0" : ""}${breakTimeLeft % 60}`;
+
+                const breakTimer = setInterval(() => {
+                    breakTimeLeft--;
+                    breakTimeDisplay.textContent = `Break Time: ${Math.floor(breakTimeLeft / 60)}:${breakTimeLeft % 60 < 10 ? "0" : ""}${breakTimeLeft % 60}`;
+
+                    if (breakTimeLeft <= 0) {
+                        clearInterval(breakTimer);
+                        breakTimeDisplay.textContent = "Break Over! Start the next round.";
+                        breakButton.disabled = false;
+                        // Reset the break time for next use
+                        breakTimeLeft = 5 * 60;
+                        startTimer(); // Restart the main timer after the break
+                    }
+                }, 1000);
+            } else {
+                statusDisplay.textContent = "You have run out of breaks!";
+                breakButton.disabled = true;
+            }
+        }
+
+        startButton.addEventListener("click", startTimer);
+        breakButton.addEventListener("click", takeBreak);
+    </script>
+</body>
+</html>

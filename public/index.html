@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskNest</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">TaskNest</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                
+            </ul>
+        </nav>
+        <div class="navbar-buttons">
+            <a href="login.html" class="btn">Login</a>
+            <a href="signup.html" class="btn">Sign Up</a>
+        </div>
+    </header>
+
+
+    <!-- Home Section -->
+    <section class="home-section">
+        <div class="home-content">
+            <h1>Welcome to TaskNest</h1>
+            <p>Your journey to better organization starts here.</p>
+            <button class="btn" id="getStarted">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <h2>Explore Our Features</h2>
+        <div class="feature-cards">
+            <div class="feature-card" id="theme">
+                <h3>Themes</h3>
+                <p>Simple and clean design for optimal focus.</p>
+            </div>
+            <div class="feature-card" id="time">
+                <h3>Timers</h3>
+                <p>Bring tranquility to your tasks with soothing visuals.</p>
+            </div>
+            <div class="feature-card" id="task">
+                <h3>Tasks</h3>
+                <p>Complete them elegantly by using our list.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <h2>What Our Users Say</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <p>"This app keeps my tasks organized and my day productive!"</p>
+                <p><strong>- Priya</strong></p>
+            </div>
+            <div class="testimonial">
+                <p>"I love the minimalist theme; it's perfect for focus!"</p>
+                <p><strong>- Sarah</strong></p>
+            </div>
+            <div class="testimonial">
+                <p>"The aesthetic theme is absolutely gorgeous!"</p>
+                <p><strong>- Michael</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 TaskNest. All Rights Reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('getStarted').onclick = function(){
+            window.location.href = 'features.html'
+        }
+        document.getElementById('features').onclick = function(){
+            window.location.href = 'features.html'
+        }
+        document.getElementById('login').onclick = function(){
+            window.location.href = 'login.html'
+        }
+        document.getElementById('signup').onclick = function(){
+            window.location.href = 'signup.html'
+        }
+        document.getElementById('theme').onclick = function(){
+            window.location.href = 'themes.html'
+        }
+        document.getElementById('time').onclick = function(){
+            window.location.href = 'timer.html'
+        }
+        document.getElementById('task').onclick = function(){
+            window.location.href = 'todo.html'
+        }
+
+    </script>
+</body>
+</html>

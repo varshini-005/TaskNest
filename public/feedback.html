@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Feedback - TaskNest</title>
+    <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">TaskNest</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section">
+        <h2>We Value Your Feedback</h2>
+        <p>Let us know what you think about TaskNest. Your feedback helps us improve!</p>
+
+        <form class="feedback-form" action="http://localhost:3000/feedback" method="POST">
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Feedback Message -->
+            <div class="form-group">
+                <label for="feedback">Your Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="5" placeholder="Write your feedback here..." required></textarea>
+            </div>
+
+            <!-- Rating -->
+            <div class="form-group">
+                <label for="rating">Rate Us:</label>
+                <select id="rating" name="rating" required>
+                    <option value="" disabled selected>Select a rating</option>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit Feedback</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 TaskNest. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

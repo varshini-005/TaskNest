@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Methods - TaskNest</title>
+    <link rel="stylesheet" href="timer.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">TaskNest</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Time Methods Section -->
+    <section class="methods-section">
+        <h2>Time Management Methods</h2>
+        <div class="method-cards">
+            <div class="method-card" id="pomodoro">
+                <h3>Pomodoro</h3>
+                <p>Work for 25 minutes, followed by a 5-minute break.</p>
+            </div>
+            <div class="method-card" id="matrix">
+                <h3>Eisenhower Matrix</h3>
+                <p>Helps you prioritize tasks based on their urgency and importance.</p>
+            </div>
+            <div class="method-card" id="52">
+                <h3>52/17</h3>
+                <p>Designed to help you stay focused and productive while avoiding burnout.</p>
+            </div>
+            <div class="method-card" id="sein">
+                <h3>Seinfeld Method</h3>
+                <p>To build consistency by working on a specific task or goal every day.</p>
+            </div>
+            <div class="method-card" id="time">
+                <h3>Time Blocking Method</h3>
+                <p>Schedule your day into dedicated blocks of time for specific tasks or activities.</p>
+            </div>
+            <div class="method-card" id="flow">
+                <h3>Flowtime Technique</h3>
+                <p>To maximize productivity while accommodating individual focus levels and energy fluctuations. </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 TaskNest. All Rights Reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('pomodoro').onclick = function(){
+            window.location.href = 'pomodoro.html'
+        }
+        document.getElementById('matrix').onclick = function(){
+            window.location.href = 'EisenhowerMatrix.html'
+        }
+        document.getElementById('52').onclick = function(){
+            window.location.href = 'fifty2by17.html'
+        }
+        document.getElementById('sein').onclick = function(){
+            window.location.href = 'SeinfeldMethod.html'
+        }
+        document.getElementById('time').onclick = function(){
+            window.location.href = 'timeBlocking.html'
+        }
+        document.getElementById('flow').onclick = function(){
+            window.location.href = 'FlowtimeTechnique.html'
+        }
+    </script>
+</body>
+</html>

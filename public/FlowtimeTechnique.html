@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowtime Technique Timer</title>
+    <style>
+         /* General Reset */
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #f5f5f5, #d8e3e7);
+            color: white;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #474787, #2c2c54);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f5b041;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .navbar-buttons .btn {
+            text-decoration: none;
+            background-color: #f5b041;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .navbar-buttons .btn:hover {
+            transform: scale(1.1);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #f5f5f5, #d8e3e7);
+            color: white;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: black;
+        }
+        .timer-container {
+            text-align: center;
+            background-color: #4e4e80;
+            border-radius: 10px;
+            padding: 40px;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+        .timer {
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #f5b041;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:disabled {
+            background-color: #b0b0b0;
+            cursor: not-allowed;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .break-time {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">TaskNest</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h2>Flowtime Technique Timer</h2>
+    <div class="timer-container">
+        <div id="timer" class="timer">00:00</div>
+        <button id="startButton" class="button">Start Timer</button>
+        <button id="pauseButton" class="button" disabled>Pause Timer</button>
+        <button id="breakButton" class="button" disabled>Take a Break</button>
+        <div class="status" id="status"></div>
+        <div class="break-time" id="breakTime"></div>
+    </div>
+
+    <audio id="alarmSound" src="sound1.mp3" preload="auto"></audio>
+
+    <script>
+        let timer;
+        let timeLeft = 0; // The remaining time
+        let isTimerRunning = false;
+        let isBreakTime = false;
+        let workTime = 0; // Work time in seconds
+        let breakCounter = 0;
+        const breakLimit = 3;
+        const timerDisplay = document.getElementById("timer");
+        const statusDisplay = document.getElementById("status");
+        const breakTimeDisplay = document.getElementById("breakTime");
+        const alarmSound = document.getElementById("alarmSound");
+        const startButton = document.getElementById("startButton");
+        const pauseButton = document.getElementById("pauseButton");
+        const breakButton = document.getElementById("breakButton");
+
+        // Function to update the timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        }
+
+        // Function to start the work timer
+        function startWorkTime() {
+            if (isTimerRunning) return;
+
+            // Prompt for work time if it's not already set
+            if (workTime === 0) {
+                workTime = prompt("How many minutes would you like to work?", 25);
+                if (workTime === null || isNaN(workTime) || workTime <= 0) {
+                    alert("Please enter a valid work time.");
+                    return;
+                }
+            }
+            timeLeft = workTime * 60; // Convert to seconds
+            updateTimerDisplay();
+
+            isTimerRunning = true;
+            startButton.disabled = true;
+            pauseButton.disabled = false;
+            breakButton.disabled = false;
+            statusDisplay.textContent = `Working for ${workTime} minutes`;
+
+            // Timer interval for work time countdown
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    isTimerRunning = false;
+                    statusDisplay.textContent = "Time's up! Take a break!";
+                    alarmSound.play();
+                    breakButton.disabled = false; // Enable break button when work timer ends
+                }
+            }, 1000);
+        }
+
+        // Function to pause the timer
+        function pauseTimer() {
+            if (!isTimerRunning) return;
+
+            clearInterval(timer);  // Clear the current interval
+            isTimerRunning = false;
+            statusDisplay.textContent = "Timer paused.";
+            pauseButton.disabled = true;
+            startButton.disabled = false;
+            alarmSound.pause(); // Stop the sound when the timer is paused
+            alarmSound.currentTime = 0; // Reset the sound to start from the beginning
+        }
+
+        // Function to start the break
+        function startBreak() {
+            if (breakCounter >= breakLimit) {
+                statusDisplay.textContent = "You have run out of breaks!";
+                breakButton.disabled = true;
+                return;
+            }
+
+            breakCounter++;
+            isBreakTime = true;
+            breakButton.disabled = true;
+
+            // Pause the work timer when starting the break
+            clearInterval(timer);
+            statusDisplay.textContent = `Break ${breakCounter} started!`;
+
+            let breakTimeLeft = 5 * 60; // 5 minutes break time
+            breakTimeDisplay.textContent = `Break Time: ${Math.floor(breakTimeLeft / 60)}:${breakTimeLeft % 60 < 10 ? "0" : ""}${breakTimeLeft % 60}`;
+
+            const breakTimer = setInterval(() => {
+                breakTimeLeft--;
+                breakTimeDisplay.textContent = `Break Time: ${Math.floor(breakTimeLeft / 60)}:${breakTimeLeft % 60 < 10 ? "0" : ""}${breakTimeLeft % 60}`;
+
+                if (breakTimeLeft <= 0) {
+                    clearInterval(breakTimer);
+                    statusDisplay.textContent = "Break over! Start the next task.";
+                    breakButton.disabled = false;
+                    alarmSound.play(); // Play sound after break is over
+                    isBreakTime = false; // End break time
+                    startWorkTime(); // Start work time again after break
+                }
+            }, 1000);
+        }
+
+        // Function to reset the timer
+        function resetTimer() {
+            timeLeft = 0;
+            updateTimerDisplay();
+            statusDisplay.textContent = "";
+            breakButton.disabled = true;
+            alarmSound.pause();
+            alarmSound.currentTime = 0;
+        }
+
+        // Event Listeners
+        startButton.addEventListener("click", startWorkTime);
+        pauseButton.addEventListener("click", pauseTimer);
+        breakButton.addEventListener("click", startBreak);
+    </script>
+</body>
+</html>
