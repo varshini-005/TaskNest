@@ -1,130 +1,191 @@
-🌿 TaskNest – Smart Productivity & Study Assistant
+# TaskNest - Personal Productivity Management System
 
-TaskNest is a clean, intuitive productivity web app designed to help users manage tasks, track study sessions, and stay motivated. With customizable themes, Pomodoro timers, and a minimal UI, TaskNest creates the perfect environment for effective work and study.
+A comprehensive productivity web application designed to help users manage tasks, track study sessions, and maintain focus using proven time management techniques.
 
-🚀 Features
-✅ Task Management
+## 🚀 Features
 
-• Add, edit, and delete tasks
+### ✅ Task Management
+- **Task Creation & Organization**
+  - Add new tasks with descriptions
+  - Mark tasks as complete
+  - Delete unwanted tasks
+  - Real-time task updates
 
-• Mark tasks as completed
+### 🎨 Customization
+- **Theme Support**
+  - Multiple theme options for personalized experience
+  - Dark and light mode variants
+  - Persistent theme selection
 
-• Organized task list for better clarity
+### ⏱️ Time Management
+- **Pomodoro Timer**
+  - Built-in Pomodoro technique support (25-minute focus sessions)
+  - Customizable work and break intervals
+  - Audio alerts for session completion
+  
+- **General Timers**
+  - Flexible timer options for various activities
+  - Study session tracking
+  - Break time management
 
-• Smooth animations and minimal UI
+### 📝 To-Do List
+- Intuitive task listing interface
+- Easy task prioritization
+- Progress tracking
 
-🎨 Themes & Personalization
+## 🛠️ Technology Stack
 
-• Switch between multiple vibrant themes
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Backend**: Node.js (optional)
+- **Database**: MongoDB
 
-• UI designed for a calm, productive workflow
+## 📋 Prerequisites
 
-• User-friendly interface with responsive design
+Before running this application, ensure you have:
 
-⏱️ Timers & Productivity Tools
+- A modern web browser (Chrome, Firefox, Safari, or Edge)
+- (Optional) Node.js v14 or higher for backend features
+- (Optional) MongoDB for data persistence
 
-• Pomodoro timer (25/5 cycles)
+## 🚀 Installation & Setup
 
-• Different study timers
+### Quick Start (Static Version)
 
-• Break reminders
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd tasknest
+   ```
 
-• Focus-driven layout for study sessions
+2. **Open the application:**
+   - Simply open `index.html` in your web browser
+   
+3. **Access the app:**
+   - Navigate to `http://localhost:8000` in your browser
 
-📝 To-Do List System
+### Full Stack Setup (With Backend)
 
-• Clean and interactive to-do list
+1. **Install backend dependencies:**
+   ```bash
+   cd server
+   npm install
+   ```
 
-• Stores tasks (with backend support)
+2. **Configure MongoDB:**
+   - Update database connection string in `config.js`
+   - Ensure MongoDB is running locally or use MongoDB Atlas
 
-• Encourages consistent study sessions
+3. **Start the backend server:**
+   ```bash
+   node server.js
+   ```
 
-🛠️ Technology Stack
-• Frontend
+4. **Launch the frontend:**
+   - Open `index.html` in your browser or deploy to a web server
 
-• HTML
+## 📱 Application Structure
 
-• CSS
+### Page Components
 
-• JavaScript
+- **Landing Page**: Welcome screen with page overview
+- **Main Dashboard**: Central hub for all productivity features
+- **Task Manager**: Interface for creating and managing tasks
+- **Timer Interface**: Pomodoro and other timer controls
+- **Settings Panel**: Theme selection and preferences
 
-Backend (Optional / Based on Your Setup)
+### Key Functionalities
 
-•MongoDB
+**Task Management System**
+- Create tasks with custom descriptions
+- Mark tasks complete with visual feedback
+- Remove completed or unwanted tasks
+- Persistent storage across sessions
 
-•Node.js / Express (if implemented)
+**Pomodoro Timer**
+- 25-minute focused work sessions
+- 5-minute short breaks
+- 15-minute long breaks after 4 sessions
+- Visual and audio notifications
 
-📦 Project Structure
-TaskNest/
-│── index.html
-│── style.css
-│── script.js
-│── /assets
-│── /themes
-└── (optional backend folder)
+**Theme Customization**
+- Multiple color schemes
+- User preference storage
+- Instant theme switching
 
-🚀 How to Run the Project
-Method 1 — Simple Run (Frontend Only)
+## 🔧 Configuration
 
-Just open the file:
+### Customization Options
+You can customize the following in `config.js` (if using backend):
+```javascript
+module.exports = {
+  port: 3000,
+  mongoURI: 'your-mongodb-connection-string',
+  pomodoroDefaults: {
+    workDuration: 25,
+    shortBreak: 5,
+    longBreak: 15
+  }
+}
+```
 
-index.html
+## 📊 Data Structure
 
+### Task Object
+```javascript
+{
+  id: "unique-id",
+  title: "Task title",
+  description: "Task description",
+  completed: false,
+  createdAt: "timestamp",
+  completedAt: "timestamp"
+}
+```
 
-in any browser (Chrome, Edge, Firefox).
+## 🎯 Use Cases
 
-Method 2 — Using a Live Server (Recommended)
+- **Students**: Track assignments, use Pomodoro for study sessions
+- **Professionals**: Manage daily tasks and project deadlines
+- **Anyone**: Improve focus and productivity with time management
 
-1. Install VS Code
+## 🚀 Deployment
 
-2. Install the Live Server extension
+### Deploy to Netlify/Vercel
+```bash
+# Build command (if needed)
+npm run build
 
-3. Right-click index.html → Open with Live Server
+# Publish directory
+dist/
+```
 
-Method 3 — With Backend (MongoDB)
+### Deploy to GitHub Pages
+```bash
+git add .
+git commit -m "Deploy TaskNest"
+git push origin main
+```
 
-If you added backend functionality:
+Enable GitHub Pages in repository settings.
 
-cd backend
-npm install
-node server.js
+## 📝 Future Enhancements
 
+- [ ] User authentication and accounts
+- [ ] Task categories and tags
+- [ ] Calendar integration
+- [ ] Mobile app version
+- [ ] Collaborative task lists
+- [ ] Progress analytics and insights
+- [ ] Cloud synchronization
 
-Then open index.html normally — or connect the frontend to your API endpoints.
+## 🤝 Contributing
 
-📱 Core User Experience
-🧩 Navigation Flow
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-• Home Page → Welcome screen + theme preview
+## 👥 Author
 
-• Tasks Page → Create and organize your tasks
+Developed as a personal productivity tool
 
-• Timer Page → Pomodoro + study tracking
+---
 
-• Settings Page → Switch themes and preferences
-
-⭐ Key Productivity Features
-
-• Motivational UI
-
-• Task priorities
-
-• Clean visual feedback
-
-• Timer alerts
-
-🗃️ Database (Optional MongoDB Use)
-
-If using a backend, typical collections include:
-
-• users
-
-• tasks
-
-• sessions
-
-• themes
-
-👥 Team
-
-TaskNest is developed as part of a productivity-focused web project, emphasizing simplicity, effectiveness, and beautiful UI design.
+**Note**: For production deployment, ensure proper environment variables are configured and sensitive data is secured.
